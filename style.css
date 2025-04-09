@@ -1,0 +1,161 @@
+/* ✅ 콰르토 게임 전체 스타일 */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  text-align: center; /* 이것 때문에 grid가 중앙이 아닐 수 있음 */
+}
+
+#turn-info {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+
+  width: calc(100vw - 30px); /* 양옆 합쳐서 10px 여백 */
+  max-width: 400px;            /* 너무 넓어지지 않게 제한 */
+  aspect-ratio: 1 / 1;         /* 정사각형 유지 */
+  
+  margin: 0 auto;              /* ✅ 수평 중앙 정렬 핵심 */
+  background-color: #fff;
+  border: 2px solid #aaa;
+  box-sizing: border-box;
+  background-image:
+    linear-gradient(to right, #ccc 1px, transparent 1px),
+    linear-gradient(to bottom, #ccc 1px, transparent 1px);
+  background-size: calc(100% / 4) calc(100% / 4);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;   /* ✅ 가로 중앙 */
+  align-items: center;       /* ✅ 세로 중앙 */
+  padding: 0;                /* ✅ 패딩 제거 */
+  margin: 0;                 /* ✅ 마진 제거 */
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block; /* ✅ inline-block이면 정렬 문제 생김 */
+}
+
+.cell.empty {
+  background-color: #fff8dc;
+  border: 2px dashed #bbb;
+}
+
+.cell.empty:hover {
+  background-color: #ffe082;
+}
+
+.cell.selected-cell {
+  background-color: #ffeeba;
+}
+
+.cell.win {
+  animation: winFlash 1s infinite;
+  background-color: #fff59d !important;
+  border-color: #fbc02d !important;
+}
+
+@keyframes winFlash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.cell.undoing {
+  animation: popOut 0.3s ease-out;
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+}
+
+#piece-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 0;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.piece {
+  width: 20vw;
+  height: 20vw;
+  max-width: 70px;
+  max-height: 70px;
+  min-width: 50px;
+  min-height: 50px;
+  margin: 4px;
+  padding: 4px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.piece.selected img {
+  animation: scaleUp 0.2s ease;
+  transform: scale(1.1);
+}
+
+.piece img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+#log-box {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 400px;
+  font-size: 14px;
+  text-align: left;
+}
+
+#controls {
+  margin-top: 20px;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+button {
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}

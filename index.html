@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4a90e2">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>콰르토 게임</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🧠 콰르토 게임</h1>
+<div id="turn-info">플레이어 1: 상대에게 줄 말을 선택하세요</div>
+
+<div id="board"></div>
+
+<h2>말 선택</h2>
+<div id="piece-selector"></div>
+
+<div id="log-box"></div>
+
+<div id="controls"></div> <!-- 맨 아래 배치 -->
+
+  <script src="game.js"></script>
+</body>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(() => console.log("✅ 서비스워커 등록됨"));
+  }
+</script>
+
+</html>
